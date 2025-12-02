@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="infoCrudAndroid/infoCrudAndroid.csproj" />
+  <Project Path="infoCrudDatabaseModels/infoCrudDatabaseModels.csproj" />
+</Solution>
