@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/infoCrudAndroid/appsettings.json
+/infoCrudAndroid/appsettings.Development.json
+/infoCrudAndroid/infoCrudAndroid.http
