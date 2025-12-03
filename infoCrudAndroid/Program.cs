@@ -30,6 +30,15 @@ app.MapGet("/api/infos", async (InfoContext db) =>
     return Results.Ok(infos);
 });
 
+app.MapGet("/api/infos/{id}", async (InfoContext db, int id) =>
+{
+    Info? info = await db.Infos.FindAsync(id);
+    if (info == null)
+        return Results.NotFound();
+
+    return Results.Ok(info);
+});
+
 app.MapPost("/api/infos", async (InfoContext db, Info info) =>
 {
     info.Id = 0;
@@ -43,11 +52,10 @@ app.MapPost("/api/infos", async (InfoContext db, Info info) =>
 
 app.MapDelete("/api/infos/{id}", async (InfoContext db, int id) =>
 {
-    var info = await db.Infos.FindAsync(id);
+    Info? info = await db.Infos.FindAsync(id);
     if (info == null)
-    {
         return Results.NotFound();
-    }
+
     db.Infos.Remove(info);
     await db.SaveChangesAsync();
     return Results.Ok(new {
@@ -62,11 +70,10 @@ app.MapDelete("/api/infos/{id}", async (InfoContext db, int id) =>
 
 app.MapPut("/api/infos/{id}", async (InfoContext db, int id, Info updatedInfo) =>
 {
-    var info = await db.Infos.FindAsync(id);
+    Info? info = await db.Infos.FindAsync(id);
     if (info == null)
-    {
         return Results.NotFound();
-    }
+    
     info.Name = updatedInfo.Name;
     info.Address = updatedInfo.Address;
     await db.SaveChangesAsync();
